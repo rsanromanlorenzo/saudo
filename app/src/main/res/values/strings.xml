@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Interaccion_elementos</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="name">name</string>
+    <string name="saludo">saludo</string>
+    <string name="saludoSr">saludoSR</string>
+    <string name="saludoSra">SaludoSra</string>
+    <string name="showTime">showTime</string>
+    <string name="hello">hello</string>
+    <string name="noNameMsg" />
+
+</resources>
