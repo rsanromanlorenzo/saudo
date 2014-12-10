@@ -48,9 +48,24 @@ public class MyActivity extends Activity {
                 //recogo el texto (el nombre) que está en el editText
                 String enteredName = text.getText().toString();
 
+
+
+                //****EXAMEN: MODIFICACION PARA DESPEDIDA
+                //Declaro String para Recoller o saudo/despedida
+                String saudodespedida=null;
+                //Tomo la referencia del RadioGroup del XML:
+                RadioGroup radiosaludo=(RadioGroup)findViewById(R.id.RadioGroup02);
+                //Evaluo cual de los botones está marcado y en función de esto modifico el string saudodespedida
+                if(R.id.hola==radiosaludo.getCheckedRadioButtonId()){
+                    //Se hola esta marcado - asigno valor da variable String hola
+                    saudodespedida=getResources().getString(R.string.Hola);
+                }else{
+                    saudodespedida=getResources().getString(R.string.Adios);
+                }
+                //Fin del Ejercicio: Modificacion para Despedida
+
                 //Creo un String Salutation que me recogerá lo seleccionado en el radioGroup
                 String salutation = null;
-
                 // referencia al radioButton
                 //Los distintos RadioButton los agrupo en un RadioGroup
                 RadioGroup radio = (RadioGroup) findViewById(R.id.RadioGroup01);
@@ -63,7 +78,7 @@ public class MyActivity extends Activity {
                     salutation = getResources().getString(R.string.saludoSra).toLowerCase();
                 }
                 //concateno el sr/sra con el nombre recogido en el enteredName
-                salutation = getResources().getString(R.string.hello) + " " + salutation + " " + enteredName;
+                salutation = saudodespedida + " " + salutation + " " + enteredName;
 
                 // obtención de la hora y fecha
                 //Si está marcado este checkbox el timeCheckBox cogerá la info de fecha y hora y la agregará al mensaje salutation
@@ -104,7 +119,7 @@ public class MyActivity extends Activity {
 
             }
         });
-        // Mostrar o no las fechas
+        // Mostrar o no las fechas__
         //Tengo un checkBox en el cual decido si muestro o no las fechas
         CheckBox checkBox = (CheckBox) findViewById(R.id.checkBox);
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

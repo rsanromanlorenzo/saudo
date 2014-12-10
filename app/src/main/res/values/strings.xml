@@ -11,5 +11,8 @@
     <string name="showTime">showTime</string>
     <string name="hello">hello</string>
     <string name="noNameMsg" />
+    <string name="Hola_adios">Hola_adios</string>
+    <string name="Hola">Hola</string>
+    <string name="Adios">Adios</string>
 
 </resources>
