@@ -8,14 +8,19 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import static android.R.layout.simple_list_item_1;
 
 
 public class MyActivity extends Activity {
@@ -29,7 +34,43 @@ public class MyActivity extends Activity {
 
         //Creo un button y lo vinculo con el boton hello del XML
         Button button = (Button) findViewById(R.id.hello);
+        //****EXAMEN
+        //Declaro String para Recoller o saudo/despedida
+        final String[] saudodespedida =  new String[1];
 
+        //****EXAMEN 2: SPINNER
+        //Primeiro creamos un adaptador de tipo ARRAY Adapter
+        //Paso 1: Creamos array con elementos
+         final String[] datos =
+                new String[]{"Hola","Adios"};
+        //Paso2: Declaramos o Array Adapter, e vinculamolo co noso array creado anteriormente
+        //o  android.R.layout.simple_spinner_item e un tipo de layout especifico para listas deplegables (spinners)
+        ArrayAdapter<String> adaptador =new ArrayAdapter<String>(this, simple_list_item_1,datos);
+        //this,android.R.layout.simple_spinner_item, datos
+        //Paso 3: Linkamos o spinner coa sua referencia  declarada no xml. Chamolle saudoSpin
+        //setDropDownViewResource é para asignarlle o layout a todos los elementos da lista unha vez desplegada,
+        //e non so o primeiro que aparece cando a lista está sen desplegar
+        //Despois asignolle o adaptador (adaptador creado anteriormente) mediante setAdapter
+         Spinner saudoSpin = (Spinner)findViewById(R.id.saudoSpinner);
+        adaptador.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        saudoSpin.setAdapter(adaptador);
+
+        //Asigno o evento para o Spinner
+
+        saudoSpin.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener() {
+                    public void onItemSelected(AdapterView<?> parent,
+                                               android.view.View v, int position, long id) {
+                       saudodespedida[0] =datos[position];
+
+                    }
+
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+
+                    }
+                });
         //Creo un evento para el boton que acabo de declarar
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,7 +91,8 @@ public class MyActivity extends Activity {
 
 
 
-                //****EXAMEN: MODIFICACION PARA DESPEDIDA
+                /*
+                //****EXAMEN 1: MODIFICACION PARA DESPEDIDA
                 //Declaro String para Recoller o saudo/despedida
                 String saudodespedida=null;
                 //Tomo la referencia del RadioGroup del XML:
@@ -63,6 +105,10 @@ public class MyActivity extends Activity {
                     saudodespedida=getResources().getString(R.string.Adios);
                 }
                 //Fin del Ejercicio: Modificacion para Despedida
+                */
+
+
+
 
                 //Creo un String Salutation que me recogerá lo seleccionado en el radioGroup
                 String salutation = null;
@@ -78,7 +124,7 @@ public class MyActivity extends Activity {
                     salutation = getResources().getString(R.string.saludoSra).toLowerCase();
                 }
                 //concateno el sr/sra con el nombre recogido en el enteredName
-                salutation = saudodespedida + " " + salutation + " " + enteredName;
+                salutation =saudodespedida[0] + " " + salutation + " " + enteredName;
 
                 // obtención de la hora y fecha
                 //Si está marcado este checkbox el timeCheckBox cogerá la info de fecha y hora y la agregará al mensaje salutation
